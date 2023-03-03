@@ -1,3 +1,9 @@
+// elementos usados
+const h1 = document.querySelector('h1')
+const button = document.querySelector('button')
+const img = document.querySelector('img')
+const input = document.querySelector('input')
+
 // callbacks AJAX
 
 const busquedaCallback = (id, cb) =>{
@@ -19,14 +25,12 @@ const busquedaCallback = (id, cb) =>{
 const callback = ( respuesta ) => {
   const nombre = respuesta.name
   console.log(nombre)
-  const h1 = document.querySelector('h1')
   h1.textContent = nombre
 }
 
 //promises
 
 const callbackJson = ( result ) => {
-  const h1 = document.querySelector('h1')
   h1.textContent = result.name
 }
 
@@ -39,7 +43,7 @@ const busquedaPromesa = ( id ) => {
   fetch(url)
     .then(( respuesta) => respuesta.json()) //then(callbackThen)
     .then(( result ) => {  // then(callbackJson)
-      const h1 = document.querySelector('h1')
+  
       h1.textContent = result.name
     })
     .catch( (err) => {
@@ -54,7 +58,7 @@ const busquedaAsyncAwait = async ( id ) => {
   try {
     const respuesta =  await fetch(url)
     const respuestJson = await respuesta.json()
-    const h1 = document.querySelector('h1')
+
     h1.textContent = respuestJson.name
   } catch (error) {
     console.log(error)
@@ -67,11 +71,13 @@ const busquedaAsyncAwait = async ( id ) => {
 const personajes = [
   {
     id: 1,
-    name: 'Goku'
+    name: 'Goku',
+    url: 'https://depor.com/resizer/dFX3j034-CJgT9Mpb4d5sVopRp4=/580x330/smart/filters:format(jpeg):quality(75)/cloudfront-us-east-1.images.arcpublishing.com/elcomercio/5UUV6NB7PJHALDU7WOFJBGKKH4.jpg'
   },
   {
     id: 2,
-    name: 'Vegeta'
+    name: 'Vegeta',
+    url: "https://images5.alphacoders.com/653/thumb-1920-653698.jpg"
   }
 ]
 
@@ -84,8 +90,8 @@ const fetchFake = (url) => {
       if( result.length > 0 ){
         resolve( result[0] )
       } else {
-        const error = new Error('No existe el usuario')
-        // const error = { message: 'No existe el usuario' }
+        const error = new Error('No existe el personaje')
+        // const error = { message: 'No existe el personaje' }
         reject(error)
       }
     },2000)
@@ -111,10 +117,10 @@ const fetchFake2 = (url) => {
         }
         resolve( resultResponse )
       } else {
-        const error = new Error('No existe el usuario')
+        const error = new Error('No existe el personaje')
         error.status = 404  // agregando propiedades al error
         error.statusText = 'Not Found'
-        // const error = { message: 'No existe el usuario' }
+        // const error = { message: 'No existe el personaje' }
         reject(error)
       }
     },2000)
@@ -128,11 +134,11 @@ const busquedaDragonBallPromise = (id) => {
   const url = 'http://busquedadragonball/'+id
   fetchFake(url)
     .then( result => {
-      const h1 = document.querySelector('h1')
+  
       h1.textContent = result.name
     })
     .catch( err => {
-      const h1 = document.querySelector('h1')
+  
       h1.textContent = err.message
     })
   }
@@ -140,7 +146,6 @@ const busquedaDragonBallPromise = (id) => {
 // Async Await
 
 const busquedaDragonBallAsyncAwait = async (id) => {
-  const h1 = document.querySelector('h1')
   h1.textContent = 'Buscando'
   try {
     const url = 'http://busquedadragonball/'+id
@@ -153,15 +158,18 @@ const busquedaDragonBallAsyncAwait = async (id) => {
 }
 
 // Usando el fetchFake2 que retorna un objeto con una metodo json que es una promesa
+
 const busquedaDragonBall = (id) => {
   const url = 'http://busquedadragonball/'+id
-  const h1 = document.querySelector('h1')
   let i = 0
   const interval = setInterval(() => {
     h1.textContent = 'Buscando personaje con id: '+id+ '.'.repeat(i)
     if( i >= 3) i=0
     else i++
   }, 250)
+  
+  img.setAttribute('src', "")
+  button.setAttribute('disabled', true)
   fetchFake2(url)
     .then( result => { // el result es data que aun no se puede ver si haces un console.log(result) veras informacion de como ver el resultado  ( se debe usar el .json() )
       // console.log(result)
@@ -169,13 +177,16 @@ const busquedaDragonBall = (id) => {
       return result.json()// aca se simula un .json() de los request y se ve que es una promesa
     })
     .then( resjson => { // se resuelve la promesa y se obtiene la data
-      h1.textContent = resjson.name
       clearInterval(interval)
+      h1.textContent = resjson.name
+      img.setAttribute('src', resjson.url)
+      button.removeAttribute('disabled')
     } )
     .catch( err => {
+      clearInterval(interval)
       console.log(err.status)
       h1.textContent = err.message
-      clearInterval(interval)
+      button.removeAttribute('disabled')
     })
 }
 
@@ -183,4 +194,7 @@ const busquedaDragonBall = (id) => {
 // busquedaDragonBallPromise(1) 
 // busquedaDragonBallAsyncAwait(2)
 
-busquedaDragonBall(2)
+function Buscar(){
+  const number = input.value
+  busquedaDragonBall(number)
+}

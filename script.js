@@ -23,6 +23,8 @@ const callback = ( respuesta ) => {
   h1.textContent = nombre
 }
 
+//promises
+
 const callbackJson = ( result ) => {
   const h1 = document.querySelector('h1')
   h1.textContent = result.name
@@ -35,8 +37,8 @@ const callbackThen = ( respuesta ) => {
 const busquedaPromesa = ( id ) => {
   const url = 'https://rickandmortyapi.com/api/character/'+id
   fetch(url)
-    .then(( respuesta) => respuesta.json())
-    .then(( result ) => {
+    .then(( respuesta) => respuesta.json()) //then(callbackThen)
+    .then(( result ) => {  // then(callbackJson)
       const h1 = document.querySelector('h1')
       h1.textContent = result.name
     })
@@ -44,6 +46,8 @@ const busquedaPromesa = ( id ) => {
       console.log(err)
     })
 }
+
+// async await
 
 const busquedaAsyncAwait = async ( id ) => {
   const url = 'https://rickandmortyapi.com/api/character/'+id
@@ -56,6 +60,9 @@ const busquedaAsyncAwait = async ( id ) => {
     console.log(error)
   }
 }
+
+
+// Simulando Fetch
 
 const personajes = [
   {
@@ -84,6 +91,8 @@ const fetchFake = (url) => {
   })
 }
 
+// Promises
+
 const busquedaDragonBallPromise = () => {
   const url = 'http://busquedadragonball/1'
   fetchFake(url)
@@ -96,6 +105,8 @@ const busquedaDragonBallPromise = () => {
       h1.textContent = err.message
     })
 }
+
+// Async Await
 
 const busquedaDragonBallAsyncAwait = async () => {
   const h1 = document.querySelector('h1')

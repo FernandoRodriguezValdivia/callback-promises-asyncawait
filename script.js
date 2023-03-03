@@ -71,15 +71,63 @@ const busquedaAsyncAwait = async ( id ) => {
 const personajes = [
   {
     id: 1,
-    name: 'Goku',
+    name: "Son Gokū",
+    raza: "Saiyajin",
+    descripcion: "Protagonista de la historia, aprendiz de artes marciales y tiene una cola.",
+    hijos: ["Son Gohan", "Son Goten"],
+    edad: 50,
+    poderAtaque: 9000,
     url: 'https://depor.com/resizer/dFX3j034-CJgT9Mpb4d5sVopRp4=/580x330/smart/filters:format(jpeg):quality(75)/cloudfront-us-east-1.images.arcpublishing.com/elcomercio/5UUV6NB7PJHALDU7WOFJBGKKH4.jpg'
   },
   {
     id: 2,
-    name: 'Vegeta',
+    name: "Vegeta",
+    raza: "Saiyajin",
+    descripcion: "Príncipe de los Saiyajin, vive en la tierra y mantiene una relación con Bulma.",
+    hijos: ["Trunks", "Bra"],
+    edad: 53,
+    poderAtaque: 9500,
     url: "https://images5.alphacoders.com/653/thumb-1920-653698.jpg"
+  },
+  {
+    id: 3,
+    name: "Bulma",
+    raza: "Humana",
+    descripcion: "Hija de una de las mentes más brillantes del mundo, creadora de artefactos.",
+    hijos: ["Trunks", "Bra"],
+    edad: 48,
+    poderAtaque: 100,
+    url: "https://e.rpp-noticias.io/xlarge/2015/10/28/18823bulma11jpg.jpg"
+  },
+  {
+    id: 4,
+    name: "Krilin",
+    raza: "Humano",
+    descripcion: "Compañero de Gokū, artista marcial, mejor amigo de Gokū.",
+    edad: 46,
+    poderAtaque: 500,
+    url: "https://elcomercio.pe/resizer/Ht6xhsshYf04gT-FdWs57p3QpsM=/1200x900/smart/filters:format(jpeg):quality(75)/cloudfront-us-east-1.images.arcpublishing.com/elcomercio/SE7DKC7AK5D3BGUQ6AIRIUSVZE.jpg"
+  },
+  {
+    id: 5,
+    name: "Piccolo",
+    raza: "Namekiano",
+    descripcion: "Monstruo hijo de Piccolo Daimaō, maestro de Son Gohan.",
+    edad: 32,
+    poderAtaque: 3000,
+    url: "https://depor.com/resizer/Qmx-qWFKpd69MXf4MXQtTMqtZHY=/580x330/smart/filters:format(jpeg):quality(75)/cloudfront-us-east-1.images.arcpublishing.com/elcomercio/ELLFQBHCP5G2TLUTSYQLSNLF74.jpg"
+  },
+  {
+    id: 6,
+    name: "Son Gohan",
+    raza: "Saiyajin/Humano",
+    descripcion: "Hijo mayor de Gokū, protagonista en varias ocasiones.",
+    edad: 38,
+    poderAtaque: 4000,
+    url: "https://as01.epimg.net/meristation/imagenes/2019/03/12/noticias/1552385012_819733_1552385161_noticia_normal.jpg"
   }
 ]
+
 
 // Fetch con Promise directo
 const fetchFake = (url) => {
